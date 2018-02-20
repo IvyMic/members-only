@@ -25,4 +25,15 @@ module SessionsHelper
     self.current_user = nil
   end
 
+  def logged_in?
+    !current_user.nil?
+  end
+
+  def need_to_login
+    unless logged_in?
+      flash[:error] = "Please log in"
+      redirect_to root_path
+    end
+  end
+
 end
