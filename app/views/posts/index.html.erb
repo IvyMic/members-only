@@ -1,15 +1,18 @@
-<% if logged_in? %>
-  <%= link_to 'Create a new post', new_post_path %>
-<% end %>
-<ul>
-  <% @posts.each do |post| %>
-    <% if logged_in? %>
-    <li>
-      <%= post.user.username %>
-    </li>
-    <% end %>
-    <li>
-      <%= post.content %>
-    </li>
+<% @posts.each do |post| %>
+  <% if logged_in? %>
+    <% author = post.user.username %>
+  <% else %>
+    <% author = "Anonymous" %>
   <% end %>
-</ul>
+  <div class="post-preview">
+    <h3 class="post-subtitle">
+      <%= post.content %>
+    </h3>
+    <p class="post-meta"> Posted by <%= author %> </p>
+    <hr>
+  </div>
+<% end %>
+<!-- Pager -->
+<div class="clearfix">
+  <a class="btn btn-primary float-right" href="#">Older Posts &rarr;</a>
+</div>
